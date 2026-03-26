@@ -139,16 +139,15 @@ function Hero() {
         <h1 className="hero-headline">Get more done.</h1>
 
         <p className="hero-subheadline">
-          MASSS is a small software studio. We build focused tools
-          that respect your time and stay out of your way.
+          MASSS is a small software studio. We build Software that works as fast as you think.
         </p>
 
         <div className="hero-cta-group">
           <Button label="Our work" variant="primary" onClick={scrollToProducts} />
           <Button
-            label="About"
+            label="Engineering"
             variant="ghost"
-            onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => document.getElementById('engineering')?.scrollIntoView({ behavior: 'smooth' })}
           />
         </div>
       </div>
