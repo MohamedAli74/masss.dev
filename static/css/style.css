@@ -650,6 +650,12 @@ header {
   box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
 }
 
+.product-card--highlighted {
+  border-color: rgba(0, 245, 160, 0.5);
+  box-shadow: 0 0 48px rgba(0, 245, 160, 0.12);
+  transition: border-color 1s ease, box-shadow 1s ease;
+}
+
 .product-card-header {
   display: flex;
   align-items: flex-start;

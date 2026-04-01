@@ -223,9 +223,9 @@ function Engineering() {
 // ================================================================
 // PRODUCT CARD COMPONENT
 // ================================================================
-function ProductCard({ name, description, status, statusVariant, cta, href, comingSoon, features: featureList }) {
+function ProductCard({ name, description, status, statusVariant, cta, href, comingSoon, features: featureList, highlighted }) {
   return (
-    <div className="glass-card product-card">
+    <div className={`glass-card product-card${highlighted ? ' product-card--highlighted' : ''}`}>
       <div className="product-card-header">
         <h3 className="product-card-title">{name}</h3>
         {status && (
@@ -255,7 +255,7 @@ function ProductCard({ name, description, status, statusVariant, cta, href, comi
 // ================================================================
 // PRODUCTS SECTION
 // ================================================================
-function Products() {
+function Products({ highlightedProduct }) {
   const products = [
     {
       name: "TrackIt",
@@ -285,7 +285,11 @@ function Products() {
         <h2 className="section-heading">What we've made.</h2>
         <div className="products-grid">
           {products.map((product, idx) => (
-            <ProductCard key={idx} {...product} />
+            <ProductCard
+              key={idx}
+              {...product}
+              highlighted={highlightedProduct === product.name.toLowerCase().replace(/\s/g, '')}
+            />
           ))}
         </div>
       </div>
@@ -373,6 +377,7 @@ function IntroScreen({ fading }) {
 function App() {
   // 'playing' → 'fading' → 'done'
   const [introState, setIntroState] = useState('playing');
+  const [highlightedProduct, setHighlightedProduct] = useState(null);
 
   useEffect(() => {
     // All animations complete by ~1.9s — hold briefly, then fade
@@ -380,6 +385,25 @@ function App() {
     // Remove from DOM after fade transition (0.6s)
     const doneTimer = setTimeout(() => setIntroState('done'), 3000);
     return () => { clearTimeout(fadeTimer); clearTimeout(doneTimer); };
+  }, []);
+
+  useEffect(() => {
+    const redirect = sessionStorage.getItem('masss-redirect');
+    if (!redirect) return;
+    sessionStorage.removeItem('masss-redirect');
+    history.replaceState(null, '', redirect);
+
+    // Normalize path to match product names e.g. /Prompt-Master → promptmaster
+    const slug = redirect.replace('/', '').toLowerCase().replace(/[-\s]/g, '');
+    setHighlightedProduct(slug);
+
+    // Scroll to product card after intro finishes
+    setTimeout(() => {
+      document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' });
+    }, 3200);
+
+    // Remove highlight after 4 seconds
+    setTimeout(() => setHighlightedProduct(null), 7000);
   }, []);
 
   // Lock scroll while intro is visible
@@ -397,7 +421,7 @@ function App() {
       {introState !== 'done' && <IntroScreen fading={introState === 'fading'} />}
       <Header />
       <Hero />
-      <Products />
+      <Products highlightedProduct={highlightedProduct} />
       <Engineering />
       <Footer />
     </>
