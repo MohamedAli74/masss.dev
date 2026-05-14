@@ -275,7 +275,7 @@ function Products({ highlightedProduct }) {
       cta: "Open Prompt Master",
       href: "https://chromewebstore.google.com/detail/Prompt%20Master/kbgapbhjhkolgcagaeefmpkmpmmmaflb",
       comingSoon: false,
-      features: ["Turns a rough idea into a fully structured prompt in one click", "Pinpoints exactly which prompt components are missing as you type", "All AI runs locally in your browser; nothing ever leaves your machine"]
+      features: ["Turns a rough idea into a fully structured prompt in one click", "Pinpoints exactly which prompt components are missing as you type", "Cloud-powered AI for faster, smarter prompt generation"]
     }
   ];
 
