@@ -269,11 +269,12 @@ function Products({ highlightedProduct }) {
     },
     {
       name: "Prompt Master",
-      description: "Unlock AI-powered productivity. The ultimate companion for prompt engineers and AI power users.",      status: "In progress",
-      statusVariant: "violet",
-      cta: "In progress",
-      href: null,
-      comingSoon: true,
+      description: "Unlock AI-powered productivity. The ultimate companion for prompt engineers and AI power users.",
+      status: "Live",
+      statusVariant: "mint",
+      cta: "Open Prompt Master",
+      href: "https://chromewebstore.google.com/detail/Prompt%20Master/kbgapbhjhkolgcagaeefmpkmpmmmaflb",
+      comingSoon: false,
       features: ["Turns a rough idea into a fully structured prompt in one click", "Pinpoints exactly which prompt components are missing as you type", "All AI runs locally in your browser; nothing ever leaves your machine"]
     }
   ];
